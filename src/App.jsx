@@ -37,12 +37,11 @@ function App() {
 
   // ----------------------------------------------Editing todo element after its creation------------------------
   const edit_todo = (index) => {
-
     showui.forEach((element) => {
       element.isEdit = false; //closing all previous opened edit by setting false and using ternary operator scroll down to see at line 84
     });
 
-    showui[index].isEdit = true;//making it true  so that current element k liyae conditional rendering chal sakae 
+    showui[index].isEdit = true; //making it true  so that current element k liyae conditional rendering chal sakae
     setshowui([...showui]);
     setuiInput(showui[index].value);
   };
@@ -56,12 +55,12 @@ function App() {
   };
   return (
     <>
-    {/* -----------------------------header------------------------------------------ */}
+      {/* -----------------------------header------------------------------------------ */}
       <Header />
 
       {/* ----------------------------------------input field------------------------------------- */}
       <section className="flex justify-center flex-col items-center mt-5 ">
-        <div className="w-[40%]">
+        <div className="w-[80%] md:w-[50%] lg:w-[40%]">
           <TextField
             id="outlined-basic"
             label="Add todo"
@@ -74,7 +73,7 @@ function App() {
           />
         </div>
 
-      {/* ----------------------------------------buttons after input field------------------------------------- */}
+        {/* ----------------------------------------buttons after input field------------------------------------- */}
         <div className="flex gap-2 mt-4">
           <Buttons value="Add" trigger={add_todo} />
           <Buttons value="Delete" trigger={del_all} color="error" />
@@ -85,10 +84,10 @@ function App() {
       {showui.map((element, index) => {
         return (
           <section
-            className="flex justify-center flex-col items-center mt-5 "
+            className="flex justify-center flex-col items-center mt-5 w-[100%]"
             key={index}
           >
-            <section className=" flex items-center border border-gray-600 mt-5 w-[40%] p-3 rounded-lg">
+            <section className=" flex items-center border border-gray-600 mt-5 w-[80%] md:w-[50%] lg:w-[40%] p-3 rounded-lg">
               {element.isEdit ? (
                 <>
                   <div className="w-[80%] me-1">
@@ -101,7 +100,6 @@ function App() {
                         setuiInput(e.target.value);
                       }}
                       value={uiinput}
-                      
                     />
                   </div>
                   <div className="flex items-center gap-2 ">
@@ -114,7 +112,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  <div className="w-[80%]">{element.value}</div>
+                  <div className="w-[80%] overflow-x-auto">{element.value}</div>
                   <div className="flex items-center gap-2 ">
                     <Buttons value="Edit" trigger={() => edit_todo(index)} />
                     <Buttons
