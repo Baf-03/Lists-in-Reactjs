@@ -28,6 +28,8 @@ function App() {
       isEdit: false,
       value: inputtodo,
     };
+   
+    // [{},{},{},{}]
     showui.push(obj_todo);
     setshowui([...showui]);
     setinputtodo("");
@@ -53,6 +55,13 @@ function App() {
     uiinput[index] = showui[index].value;
     setuiInput([...uiinput]);
   };
+  //---------------------making enter from keyboard work-------------------------------------------
+const handleKeyDown =(event)=>{
+  if (event.key === 'Enter') {
+    add_todo()
+  }
+}
+  
   return (
     <>
       {/* -----------------------------header------------------------------------------ */}
@@ -66,6 +75,7 @@ function App() {
             label="Add todo"
             variant="outlined"
             className="w-[100%]"
+            onKeyDown={handleKeyDown}
             onChange={(e) => {
               setinputtodo(e.target.value);
             }}
@@ -96,6 +106,7 @@ function App() {
                       label=""
                       variant="standard"
                       className="w-[100%] "
+                      onKeyDown={(e)=>{e.key=="Enter"?edit_todo_element(index):null}}
                       onChange={(e) => {
                         setuiInput(e.target.value);
                       }}
@@ -107,7 +118,7 @@ function App() {
                       value="Save"
                       trigger={() => edit_todo_element(index)}
                     />
-                    <Buttons value="Delete" color="error" />
+                    <Buttons value="Complete" color="error" />
                   </div>
                 </>
               ) : (
